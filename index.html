@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cosmic Legacy — by Stellar Minds</title>
+  <meta name="description"
+    content="Cosmic Legacy: explore the rovers and machines left behind on the Moon and Mars. Created by Stellar Minds.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head>
+
+<body data-world="moon">
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#home" aria-label="Stellar Minds home">
+        <svg class="brand-logo" viewBox="0 0 40 40" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2563eb" />
+              <stop offset="1" stop-color="#60a5fa" />
+            </linearGradient>
+          </defs>
+          <circle cx="20" cy="20" r="11" fill="url(#lg)" />
+          <ellipse cx="20" cy="20" rx="18" ry="6" fill="none" stroke="#0b1b3f" stroke-width="2"
+            transform="rotate(-24 20 20)" />
+          <path d="M32 5l1.2 3 3 1.2-3 1.2L32 13.4l-1.2-3-3-1.2 3-1.2z" fill="#f59e0b" />
+        </svg>
+        <span class="brand-text">STELLAR MINDS</span>
+      </a>
+      <nav class="mainnav" aria-label="Main">
+        <a href="#moon-missions">Moon</a>
+        <a href="#mars-missions">Mars</a>
+        <a href="#quizzes">Quizzes</a>
+        <a href="#game">Game</a>
+        <a href="#maps">Maps</a>
+        <a href="#timelines">Timelines</a>
+        <a href="#sources">Sources</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><span></span></button>
+      <div class="world-toggle" role="group" aria-label="Choose world">
+        <button class="wbtn" data-w="moon" aria-pressed="true"><span class="dot"></span>MOON</button>
+        <button class="wbtn" data-w="mars" aria-pressed="false"><span class="dot"></span>MARS</button>
+      </div>
+    </div>
+    <nav class="drawer" id="drawer" aria-label="Mobile">
+      <a href="#moon-missions">Moon Missions</a>
+      <a href="#mars-missions">Mars Missions</a>
+      <a href="#quizzes">Quizzes</a>
+      <a href="#game">Space Memory Match</a>
+      <a href="#maps">Interactive Maps</a>
+      <a href="#timelines">Timelines</a>
+      <a href="#sources">Sources &amp; References</a>
+    </nav>
+  </header>
+
+  <!-- ======================= HOME ======================= -->
+  <main id="home">
+    <section class="hero" id="top">
+      <div class="deco orbitline" style="width:900px;height:900px;left:-420px;top:-380px"></div>
+      <div class="deco orbitline" style="width:600px;height:600px;right:-260px;bottom:-380px"></div>
+      <div class="deco star4" style="left:6%;top:16%"></div>
+      <div class="deco dotstar" style="left:44%;top:10%;animation-delay:.6s"></div>
+      <div class="deco star4" style="left:40%;bottom:12%;animation-delay:1.2s;width:10px;height:10px"></div>
+      <div class="deco dotstar" style="left:3%;bottom:20%;animation-delay:1.8s"></div>
+      <div class="wrap">
+        <div class="fade-in">
+          <span class="eyebrow">✦ A STELLAR MINDS PROJECT</span>
+          <h1>COSMIC LEGACY</h1>
+          <p class="quote">“Every mission leaves a story. Every machine has a story to tell.”</p>
+          <p class="lead">Welcome, space explorer! Robots and rovers are still sitting on the Moon and Mars right now.
+            Explore the machines we left behind, discover their stories, learn amazing facts, take quizzes, and play
+            space games.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#moon-missions">Explore Missions <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#maps">Open the Maps</a>
+          </div>
+          <div class="hero-stats">
+            <div><b>5</b>Moon vehicles</div>
+            <div><b>7</b>Mars explorers</div>
+            <div><b>120</b>quiz questions</div>
+          </div>
+        </div>
+        <div class="planet-stage" id="planetStage" aria-live="polite">
+          <div class="ring r2"></div>
+          <div class="ring r1">
+            <div class="ring-spin"><span class="sat"></span></div>
+          </div>
+          <div class="planet-float">
+            <div class="planet-glow"></div><canvas id="heroPlanet" aria-label="Rotating Moon"></canvas>
+          </div>
+          <div class="deco asteroid" style="left:2%;top:22%"></div>
+          <div class="deco asteroid" style="right:4%;top:8%;width:14px;height:11px;animation-delay:-3s"></div>
+          <div class="deco asteroid" style="right:0;bottom:24%;width:18px;height:13px;animation-delay:-5s"></div>
+          <div class="deco star4" style="left:12%;bottom:12%;animation-delay:.4s"></div>
+          <div class="deco star4" style="right:14%;top:2%;animation-delay:1.6s;width:10px;height:10px"></div>
+          <div class="deco dotstar" style="right:6%;top:46%;animation-delay:.9s"></div>
+          <div class="planet-label"><i></i><span id="planetName">The Moon · Earth's companion</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:40px">
+      <div class="wrap">
+        <div class="features">
+          <a class="feature" href="#moon-missions">
+            <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z" />
+              </svg></div>
+            <h3>Learn</h3>
+            <p>Discover amazing facts</p>
+          </a>
+          <a class="feature" href="#game">
+            <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="6" />
+                <path d="M7 10v4M5 12h4" />
+                <circle cx="16" cy="11" r="1" fill="#fff" />
+                <circle cx="18" cy="13" r="1" fill="#fff" />
+              </svg></div>
+            <h3>Play</h3>
+            <p>Try fun games</p>
+          </a>
+          <a class="feature" href="#maps">
+            <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" />
+              </svg></div>
+            <h3>Explore</h3>
+            <p>Check interactive maps</p>
+          </a>
+          <a class="feature" href="#quizzes">
+            <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z" />
+                <path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3" />
+              </svg></div>
+            <h3>Challenge Yourself</h3>
+            <p>Take quizzes and see your score!</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec alt" id="maps">
+      <div class="deco orbitline" style="width:520px;height:520px;left:-260px;top:-200px"></div>
+      <div class="wrap">
+        <div class="sec-head"><span class="tag neutral">Explore</span>
+          <h2>Interactive Moon &amp; Mars Maps</h2>
+          <p>Drag to spin the globe, scroll or pinch to zoom, and tap a marker to see where each machine landed or was
+            left behind.</p>
+        </div>
+        <div class="map-top">
+          <div class="world-toggle" role="group" aria-label="Choose map">
+            <button class="wbtn" data-map="moon" aria-pressed="true"><span class="dot"
+                style="background:radial-gradient(circle at 35% 35%,#fff,#9aa7bd)"></span>MOON</button>
+            <button class="wbtn" data-map="mars" aria-pressed="false"><span class="dot"
+                style="background:radial-gradient(circle at 35% 35%,#ffc59a,#c2410c)"></span>MARS</button>
+          </div>
+        </div>
+        <div class="map-shell">
+          <div class="map-view" id="mapView">
+            <canvas id="mapCanvas" aria-label="Interactive globe"></canvas>
+            <model-viewer id="moonModel" src="models/moon.glb" alt="Moon" camera-controls disable-pan interaction-prompt="none"
+              shadow-intensity="0" camera-orbit="5deg 72deg 120%" min-camera-orbit="auto auto 60%"
+              max-camera-orbit="auto auto 300%"></model-viewer>
+            <div class="markers" id="markers"></div>
+            <div class="map-title" id="mapTitle">The Moon</div>
+            <div class="map-ctrl">
+              <button id="zin" aria-label="Zoom in">+</button>
+              <button id="zout" aria-label="Zoom out">−</button>
+              <button id="zreset" aria-label="Reset view" style="font-size:16px">⟲</button>
+            </div>
+            <div class="map-hint">Drag to rotate · Scroll / pinch to zoom</div>
+            <div class="popup" id="popup"></div>
+          </div>
+          <aside class="legend">
+            <h4 id="legendTitle">Moon missions</h4>
+            <p class="note">Choose a mission to fly to its location.</p>
+            <div class="list" id="legendList"></div>
+            <p class="note" style="margin-top:12px">Globe shading is an artistic illustration. Marker positions use
+              coordinates published by NASA.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec alt" id="moon-missions">
+      <div class="deco star4" style="left:8%;top:80px"></div>
+      <div class="deco orbitline" style="width:420px;height:420px;right:-200px;top:-120px"></div>
+      <div class="wrap">
+        <div class="sec-head"><span class="tag moon">Moon Missions</span>
+          <h2>Machines left on the Moon</h2>
+          <p>Five rovers are still parked on the Moon — two robots driven from Earth and three cars driven by
+            astronauts. Click a card to read its full story.</p>
+        </div>
+        <div class="cards" id="moonCards"></div>
+      </div>
+    </section>
+
+    <section class="sec" id="mars-missions">
+      <div class="deco star4" style="right:9%;top:90px;background:#fb923c"></div>
+      <div class="deco orbitline"
+        style="width:420px;height:420px;left:-220px;bottom:-160px;border-color:rgba(251,146,60,.3)"></div>
+      <div class="wrap">
+        <div class="sec-head"><span class="tag mars">Mars Missions</span>
+          <h2>Explorers on the Red Planet</h2>
+          <p>Seven robots have rolled — or flown! — across Mars. Some are resting forever, and some are still working
+            today.</p>
+        </div>
+        <div class="cards" id="marsCards"></div>
+      </div>
+    </section>
+
+    <section class="sec" id="timelines">
+      <div class="deco star4" style="right:8%;top:80px"></div>
+      <div class="wrap">
+        <div class="sec-head"><span class="tag neutral">History</span>
+          <h2>Space Timelines</h2>
+          <p>How exploring the Moon and Mars unfolded, step by step.</p>
+        </div>
+        <div class="tl-wrap">
+          <div class="tl moon">
+            <h3><span class="badge" style="background:radial-gradient(circle at 35% 35%,#fff,#94a3b8)"></span>Moon
+              Exploration Timeline</h3>
+            <ol id="tlMoon"></ol>
+          </div>
+          <div class="tl mars">
+            <h3><span class="badge" style="background:radial-gradient(circle at 35% 35%,#ffc59a,#c2410c)"></span>Mars
+              Exploration Timeline</h3>
+            <ol id="tlMars"></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="sec alt" id="quizzes">
+      <div class="deco dotstar" style="left:12%;top:60px"></div>
+      <div class="wrap">
+        <div class="sec-head"><span class="tag neutral">Challenge Yourself</span>
+          <h2>Quiz Center</h2>
+          <p>Every vehicle has its own 10-question quiz. Pick one, read its story, then test what you learned!</p>
+        </div>
+        <div class="qgrid" id="quizGrid"></div>
+      </div>
+    </section>
+
+    <section class="sec" id="game">
+      <div class="deco star4" style="left:10%;top:100px"></div>
+      <div class="deco asteroid" style="right:12%;top:120px"></div>
+      <div class="wrap">
+        <div class="sec-head"><span class="tag neutral">Play</span>
+          <h2>Space Memory Match</h2>
+          <p>Flip two cards at a time and find all 8 matching pairs of worlds and machines.</p>
+        </div>
+        <div class="game-shell">
+          <div class="game-bar">
+            <div class="pill">Pairs found: <b id="pairs">0</b> / 8</div>
+            <div class="pill">Moves: <b id="moves">0</b></div>
+            <button class="btn btn-ghost" id="restart" style="padding:10px 18px">↻ New game</button>
+          </div>
+          <div class="board" id="board"></div>
+          <div class="win" id="win">
+            <h3>🎉 Congratulations, Space Explorer!</h3>
+            <p id="winText">You found every pair!</p><button class="btn btn-primary" id="again">Play again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec alt" id="sources">
+      <div class="wrap">
+        <div class="sec-head"><span class="tag neutral">References</span>
+          <h2>Sources &amp; References</h2>
+          <p>All facts, dates, discoveries and coordinates on Cosmic Legacy come from official NASA websites and
+            databases.</p>
+        </div>
+        <div class="src-grid" id="srcGrid"></div>
+        <p class="src-note">Pictures of the vehicles on this website are original illustrations drawn by Stellar Minds
+          from NASA descriptions. For real photographs, visit the NASA pages above and the NASA Image and Video Library:
+          <a href="https://images.nasa.gov/" target="_blank" rel="noopener">images.nasa.gov</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= DETAIL ======================= -->
+  <main id="detail"></main>
+
+  <footer>
+    <div class="wrap">
+      <p><b>COSMIC LEGACY</b></p>
+      <p>Created with curiosity by <b style="letter-spacing:.08em">Stellar Minds</b> · Information from <a
+          href="https://www.nasa.gov/" target="_blank" rel="noopener">NASA</a></p>
+      <p style="opacity:.7;margin:0">“Every mission leaves a story. Every machine has a story to tell.”</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
